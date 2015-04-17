@@ -67,8 +67,8 @@ public class carControl : MonoBehaviour {
         wheel_RR.steerAngle = -Input.GetAxis("Horizontal") * turning /* * Time.deltaTime */;
 
         // Anti-roll
-        //AntiRoll(ref wheel_RL, ref wheel_RR, 5000.0f);
-        //AntiRoll(ref wheel_FL, ref wheel_FR, 5000.0f);
+        AntiRoll(ref wheel_RL, ref wheel_RR, 5000.0f);
+        AntiRoll(ref wheel_FL, ref wheel_FR, 5000.0f);
 
         // Joystick breaks
         float break_applied = Mathf.Abs(Input.GetAxisRaw("3rd axis"));
@@ -79,7 +79,7 @@ public class carControl : MonoBehaviour {
         }
 
         // keyboard brakes
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             wheel_RL.brakeTorque = brake * 1f /* * Time.deltaTime*/;
             wheel_RR.brakeTorque = brake * 1f /* * Time.deltaTime*/;

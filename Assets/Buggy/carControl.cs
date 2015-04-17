@@ -52,37 +52,37 @@ public class carControl : MonoBehaviour {
         startline_time = 61.0f;
     }
 	
-	// Update is called once per frame
+	// Physics Update will be called by the engine as needed based on frame rates 
 	void FixedUpdate () 
     {
 	    // make the car move forward
-        wheel_RL.motorTorque = speed * Input.GetAxis("Vertical");
-        wheel_RR.motorTorque = speed * Input.GetAxis("Vertical");
+        wheel_RL.motorTorque = speed * Input.GetAxis("Vertical") /* * Time.deltaTime */;
+        wheel_RR.motorTorque = speed * Input.GetAxis("Vertical") /* * Time.deltaTime */;
 
         wheel_RL.brakeTorque = 0.0f;
         wheel_RR.brakeTorque = 0.0f;
 
         // turn the car
-        wheel_RL.steerAngle = -Input.GetAxis("Horizontal") * turning;
-        wheel_RR.steerAngle = -Input.GetAxis("Horizontal") * turning;
+        wheel_RL.steerAngle = -Input.GetAxis("Horizontal") * turning /* * Time.deltaTime */;
+        wheel_RR.steerAngle = -Input.GetAxis("Horizontal") * turning /* * Time.deltaTime */;
 
         // Anti-roll
-        AntiRoll(ref wheel_RL, ref wheel_RR, 5000.0f);
-        AntiRoll(ref wheel_FL, ref wheel_FR, 5000.0f);
+        //AntiRoll(ref wheel_RL, ref wheel_RR, 5000.0f);
+        //AntiRoll(ref wheel_FL, ref wheel_FR, 5000.0f);
 
         // Joystick breaks
         float break_applied = Mathf.Abs(Input.GetAxisRaw("3rd axis"));
         if (break_applied > .1f)
         {
-            wheel_RL.brakeTorque = brake * break_applied;
-            wheel_RR.brakeTorque = brake * break_applied;
+            wheel_RL.brakeTorque = brake * break_applied /* * Time.deltaTime*/;
+            wheel_RR.brakeTorque = brake * break_applied /* * Time.deltaTime*/;
         }
 
         // keyboard brakes
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            wheel_RL.brakeTorque = brake;
-            wheel_RR.brakeTorque = brake;
+            wheel_RL.brakeTorque = brake * 1f /* * Time.deltaTime*/;
+            wheel_RR.brakeTorque = brake * 1f /* * Time.deltaTime*/;
         }
 
         //velocity = wheel_RR.rigidbody.velocity.magnitude;
@@ -93,12 +93,26 @@ public class carControl : MonoBehaviour {
     {
         if (Input.GetKeyUp(KeyCode.F)) transform.Rotate(0f, 0f, 180f);
 
-        hitStartLineCheck();
+        //hitStartLineCheck();
+        tc.UpdateTimer();
+        current_time = tc.GetTime();
 
         float milesperhour = velocity * 0.000621371f * 60.0f * 60.0f;
         float minutes = Mathf.Floor(current_time / 60.0f);
         float seconds = current_time - minutes * 60.0f;
-        output_text.text = milesperhour.ToString("0.00") + "m/h" + System.Environment.NewLine + "Lap Time:" + minutes + ":" + seconds + System.Environment.NewLine + "Lap Count:" + lapCount;
+
+        float fast_m = Mathf.Floor(minLapTime / 60.0f);
+        float fast_s = minLapTime - fast_m * 60.0f;
+        
+        if ( minLapTime != 9999999.0f)
+            output_text.text = milesperhour.ToString("0.00") + "m/h" + 
+                System.Environment.NewLine + "Lap  Time:" + minutes + ":" + seconds.ToString("00.00") + 
+                System.Environment.NewLine + "Best Time:" + fast_m + ":" + fast_s.ToString("00.00") +
+                System.Environment.NewLine + "Lap Count:" + lapCount;
+        else
+            output_text.text = milesperhour.ToString("0.00") + "m/h" + 
+                System.Environment.NewLine + "Lap Time:" + minutes + ":" + seconds.ToString("00.00") +
+                System.Environment.NewLine + "Lap Count:" + lapCount;
     }
 
     void AntiRoll (ref WheelCollider WheelL, ref WheelCollider WheelR, float AntiRoll)
@@ -139,54 +153,15 @@ public class carControl : MonoBehaviour {
         }
     }
 
-    void hitStartLineCheck()
+    void OnTriggerEnter(Collider other)
     {
-        WheelHit hit_FL;
-        bool startline_FL = false;
-        bool grounded_FL = wheel_FL.GetGroundHit(out hit_FL);
-        if (grounded_FL && hit_FL.collider.transform.name == "StartLine")
-            startline_FL = true;
-
-        WheelHit hit_FR;
-        bool startline_FR = false;
-        bool grounded_FR = wheel_FR.GetGroundHit(out hit_FR);
-        if (grounded_FR && hit_FR.collider.transform.name == "StartLine")
-            startline_FR = true;
-
-        WheelHit hit_RL;
-        bool startline_RL = false;
-        bool grounded_RL = wheel_RL.GetGroundHit(out hit_RL);
-        if (grounded_RL && hit_RL.collider.transform.name == "StartLine")
-            startline_RL = true;
-
-        WheelHit hit_RR;
-        bool startline_RR = false;
-        bool grounded_RR = wheel_RR.GetGroundHit(out hit_RR);
-        if (grounded_RR && hit_RR.collider.transform.name == "StartLine")
-            startline_RR = true;
-
-        if (!startline_hit && (startline_FR | startline_FL | startline_RR | startline_RL))
+        if (lapCount != 0)
         {
-            // this really needs to be debounced to prevent cheaters and accidental quick crossings
-            startline_hit = true;
-
-            Debug.Log("Starting New Lap");
-
-            if (lapCount != 0)
-            {
-                tc.UpdateTimer();
-                tc.calcAvg(tc.GetTime(), ref averageLapTime, ref minLapTime, ref maxLapTime);
-                tc.ResetTimer();
-            }
-            else tc.StartTimer();
-            ++lapCount;
+            tc.UpdateTimer();
+            tc.calcAvg(tc.GetTime(), ref averageLapTime, ref minLapTime, ref maxLapTime);
+            tc.ResetTimer();
         }
-        else if (startline_hit && !startline_FR && !startline_FL && !startline_RR && !startline_RL)
-        {
-            startline_hit = false;
-        }
-
-        tc.UpdateTimer();
-        current_time = tc.GetTime();
+        else tc.StartTimer();
+        ++lapCount;
     }
 }

@@ -64,13 +64,13 @@
      <None Include="Assets\EasyRoads3D Free\Shaders\EasyRoads3D-Road-Edit-Mode.shader" />
      <None Include="Assets\TerrainToolkit\Read me.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>C:/Users/jpstack/Documents/OSU/CS4173/Assignments/Group Assignment/Terrain Testing/CulledMaster/Karts/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>C:/Users/jpstack/Documents/OSU/CS4173/Assignments/Group Assignment/Terrain Testing/culledmasterII/Karts/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.3/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="EasyRoads3D">
- <HintPath>C:/Users/jpstack/Documents/OSU/CS4173/Assignments/Group Assignment/Terrain Testing/CulledMaster/Karts/Assets/EasyRoads3D Free/lib/EasyRoads3D.dll</HintPath>
+ <HintPath>C:/Users/jpstack/Documents/OSU/CS4173/Assignments/Group Assignment/Terrain Testing/culledmasterII/Karts/Assets/EasyRoads3D Free/lib/EasyRoads3D.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

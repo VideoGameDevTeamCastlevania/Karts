@@ -65,10 +65,10 @@
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.3/Editor/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="EasyRoads3DEditor">
- <HintPath>C:/Users/jpstack/Documents/OSU/CS4173/Assignments/Group Assignment/Terrain Testing/CulledMaster/Karts/Assets/EasyRoads3D Free/Editor/EasyRoads3DEditor.dll</HintPath>
+ <HintPath>C:/Users/jpstack/Documents/OSU/CS4173/Assignments/Group Assignment/Terrain Testing/culledmasterII/Karts/Assets/EasyRoads3D Free/Editor/EasyRoads3DEditor.dll</HintPath>
  </Reference>
  <Reference Include="EasyRoads3D">
- <HintPath>C:/Users/jpstack/Documents/OSU/CS4173/Assignments/Group Assignment/Terrain Testing/CulledMaster/Karts/Assets/EasyRoads3D Free/lib/EasyRoads3D.dll</HintPath>
+ <HintPath>C:/Users/jpstack/Documents/OSU/CS4173/Assignments/Group Assignment/Terrain Testing/culledmasterII/Karts/Assets/EasyRoads3D Free/lib/EasyRoads3D.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>

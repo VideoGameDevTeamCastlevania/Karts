@@ -24,6 +24,7 @@ public class carControl : MonoBehaviour {
     public float speed   = 25;
     public float brake   = 30;
     public float turning = 15;
+    public float antiroll = 5000;
 
     public Text output_text;
 
@@ -67,8 +68,8 @@ public class carControl : MonoBehaviour {
         wheel_RR.steerAngle = -Input.GetAxis("Horizontal") * turning /* * Time.deltaTime */;
 
         // Anti-roll
-        AntiRoll(ref wheel_RL, ref wheel_RR, 5000.0f);
-        AntiRoll(ref wheel_FL, ref wheel_FR, 5000.0f);
+        AntiRoll(ref wheel_RL, ref wheel_RR, antiroll);
+        AntiRoll(ref wheel_FL, ref wheel_FR, antiroll);
 
         // Joystick breaks
         float break_applied = Mathf.Abs(Input.GetAxisRaw("3rd axis"));

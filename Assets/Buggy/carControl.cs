@@ -71,6 +71,14 @@ public class carControl : MonoBehaviour {
         AntiRoll(ref wheel_RL, ref wheel_RR, antiroll);
         AntiRoll(ref wheel_FL, ref wheel_FR, antiroll);
 
+        // testing anti-roll going front to rear
+        AntiRoll(ref wheel_RL, ref wheel_FL, antiroll);
+        AntiRoll(ref wheel_RR, ref wheel_FR, antiroll);
+
+        // testing anti-roll going front to rear crossing right & left
+        AntiRoll(ref wheel_RL, ref wheel_FR, antiroll);
+        AntiRoll(ref wheel_RR, ref wheel_FL, antiroll);
+
         // Joystick breaks
         float break_applied = Mathf.Abs(Input.GetAxisRaw("3rd axis"));
         if (break_applied > .1f)

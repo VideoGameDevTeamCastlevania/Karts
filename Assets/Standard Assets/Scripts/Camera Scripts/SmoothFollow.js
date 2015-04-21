@@ -23,7 +23,25 @@ var rotationDamping = 3.0;
 @script AddComponentMenu("Camera-Control/Smooth Follow")
 
 
-//function LateUpdate () {
+function OnGUI () {
+    var mouseScroll = Input.GetAxis("Mouse ScrollWheel");
+    if ( mouseScroll != 0 )
+    {
+        if ( Input.GetKey(KeyCode.LeftShift) )
+        {
+            // height
+            height = height + mouseScroll;
+            if ( height < 2 ) height = 2;
+        }
+        else
+        {
+            // distance
+            distance = distance + mouseScroll;
+            if ( distance < 2 ) distance = 2;
+        }
+    }
+}
+
 function FixedUpdate () {
 	// Early out if we don't have a target
 	if (!target)

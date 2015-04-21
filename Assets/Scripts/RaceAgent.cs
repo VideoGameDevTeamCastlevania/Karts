@@ -12,7 +12,7 @@ public class RaceAgent : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		agent = GetComponent<NavMeshAgent>();
-		agent.angularSpeed = 360;
+		agent.angularSpeed = 10000;
 		WaypointObj.GetComponent<WaypointManager> ();
 		targetWaypoint = WaypointObj.GetComponent<WaypointManager> ().Waypoints [waypointIndex];
 		targetPosition = targetWaypoint.transform.position;
@@ -22,11 +22,18 @@ public class RaceAgent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if ((Vector3.Distance(transform.position, targetPosition) < distranceFromWaypoint)) { //& (targetWaypoint.GetComponent<Waypoint>().end == false)) {
+		if ((Vector3.Distance (transform.position, targetPosition) < distranceFromWaypoint) & (targetWaypoint.GetComponent<Waypoint> ().end == false)) {
 			waypointIndex += 1;
 			targetWaypoint = WaypointObj.GetComponent<WaypointManager> ().Waypoints [waypointIndex];
 			targetPosition = targetWaypoint.transform.position;
 			agent.SetDestination (targetPosition);
+		} else {
+			if (waypointIndex == WaypointObj.GetComponent<WaypointManager> ().Waypoints.Length - 1) {
+				waypointIndex = 0;
+				targetWaypoint = WaypointObj.GetComponent<WaypointManager> ().Waypoints [waypointIndex];
+				targetPosition = targetWaypoint.transform.position;
+				agent.SetDestination (targetPosition);
+			}
 		}
 	}
 }

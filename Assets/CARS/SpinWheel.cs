@@ -12,7 +12,7 @@ public class SpinWheel : MonoBehaviour {
 	void Start () {
 		RB = GetComponent<Rigidbody> ();
 		Vector3 y = RB.centerOfMass;
-		y.y = -1.3f;
+		y.y = -1.4f;
 		RB.centerOfMass = y;
 		DontWaste = FL.steerAngle;
 	}

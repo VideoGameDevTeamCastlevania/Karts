@@ -24,7 +24,8 @@ public class carControl : MonoBehaviour {
     public float speed   = 25;
     public float brake   = 30;
     public float turning = 15;
-    public float antiroll = 5000;
+    public float front_antiroll = 5000;
+    public float rear_antiroll = 5000;
 
     public Text output_text;
 
@@ -33,8 +34,8 @@ public class carControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-        Vector3 moveForward = new Vector3(0f, 0f, 1.0f);
-        rigidbody.centerOfMass += moveForward;
+        //Vector3 moveForward = new Vector3(0f, 0f, 1.0f);
+        //rigidbody.centerOfMass += moveForward;
 
         startline_hit = false;
         startline_time = 0.0f;
@@ -59,6 +60,8 @@ public class carControl : MonoBehaviour {
 	    // make the car move forward
         wheel_RL.motorTorque = speed * Input.GetAxis("Vertical") /* * Time.deltaTime */;
         wheel_RR.motorTorque = speed * Input.GetAxis("Vertical") /* * Time.deltaTime */;
+        wheel_FL.motorTorque = speed * Input.GetAxis("Vertical") /* * Time.deltaTime */;
+        wheel_FR.motorTorque = speed * Input.GetAxis("Vertical") /* * Time.deltaTime */;
 
         wheel_RL.brakeTorque = 0.0f;
         wheel_RR.brakeTorque = 0.0f;
@@ -68,21 +71,17 @@ public class carControl : MonoBehaviour {
         wheel_RR.steerAngle = -Input.GetAxis("Horizontal") * turning /* * Time.deltaTime */;
 
         // Anti-roll
-        AntiRoll(ref wheel_RL, ref wheel_RR, antiroll);
-        AntiRoll(ref wheel_FL, ref wheel_FR, antiroll);
-
-        // testing anti-roll going front to rear
-        AntiRoll(ref wheel_RL, ref wheel_FL, antiroll);
-        AntiRoll(ref wheel_RR, ref wheel_FR, antiroll);
-
-        // testing anti-roll going front to rear crossing right & left
-        AntiRoll(ref wheel_RL, ref wheel_FR, antiroll);
-        AntiRoll(ref wheel_RR, ref wheel_FL, antiroll);
+        AntiRoll(ref wheel_RL, ref wheel_RR, rear_antiroll);
+        AntiRoll(ref wheel_FL, ref wheel_FR, front_antiroll);
 
         // Joystick breaks
         float break_applied = Mathf.Abs(Input.GetAxisRaw("3rd axis"));
         if (break_applied > .1f)
         {
+            // testing anti-roll going front to rear crossing right & left
+            AntiRoll(ref wheel_RL, ref wheel_FR, rear_antiroll);
+            AntiRoll(ref wheel_RR, ref wheel_FL, rear_antiroll);
+
             wheel_RL.brakeTorque = brake * break_applied /* * Time.deltaTime*/;
             wheel_RR.brakeTorque = brake * break_applied /* * Time.deltaTime*/;
         }
@@ -90,12 +89,63 @@ public class carControl : MonoBehaviour {
         // keyboard brakes
         if (Input.GetKey(KeyCode.Space))
         {
+            // testing anti-roll going front to rear crossing right & left
+            AntiRoll(ref wheel_RL, ref wheel_FR, rear_antiroll);
+            AntiRoll(ref wheel_RR, ref wheel_FL, rear_antiroll);
+
             wheel_RL.brakeTorque = brake * 1f /* * Time.deltaTime*/;
             wheel_RR.brakeTorque = brake * 1f /* * Time.deltaTime*/;
         }
 
         //velocity = wheel_RR.rigidbody.velocity.magnitude;
         velocity = rigidbody.velocity.magnitude;
+
+        WheelFrictionCurve fwd_wfc = wheel_RL.forwardFriction;
+        WheelFrictionCurve sd_wfc = wheel_RL.sidewaysFriction;
+
+        speed = 60;
+        // adjust the wheel stiffness based on speed
+        if (velocity < 10f)
+        {
+            fwd_wfc.stiffness = .2f;
+            sd_wfc.stiffness = .2f;
+        }
+        else if (velocity < 15f)
+        {
+            fwd_wfc.stiffness = .08f;
+            sd_wfc.stiffness = .06f;
+        }
+        else if (velocity < 20f)
+        {
+            fwd_wfc.stiffness = .06f;
+            sd_wfc.stiffness = .04f;
+        }
+        else if (velocity < 30f)
+        {
+            fwd_wfc.stiffness = .04f;
+            sd_wfc.stiffness = .02f;
+        }
+        else if (velocity < 60f)
+        {
+            speed = 70;
+            fwd_wfc.stiffness = .02f;
+            sd_wfc.stiffness = .01f;
+        }
+        else if (velocity < 80f)
+        {
+            speed = 80;
+            fwd_wfc.stiffness = .01f;
+            sd_wfc.stiffness = .005f;
+        }
+        else if (velocity > 79f)
+        {
+            speed = 90;
+            fwd_wfc.stiffness = .005f;
+            sd_wfc.stiffness = .005f;
+        }
+
+        wheel_RL.forwardFriction = wheel_RR.forwardFriction = wheel_FL.forwardFriction = wheel_FR.forwardFriction = fwd_wfc;
+        wheel_RL.sidewaysFriction = wheel_RR.sidewaysFriction = wheel_FL.sidewaysFriction = wheel_FR.sidewaysFriction = sd_wfc;
     }
 
     void Update()

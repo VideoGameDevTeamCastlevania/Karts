@@ -21,7 +21,9 @@ public class miniMapFollow : MonoBehaviour {
         Transform trans = GetComponent<Transform>();
 
 		// set up camera position
-        trans.position = new Vector3(kart.transform.position.x, trans.position.y, kart.transform.position.z); 
+        trans.position = new Vector3(kart.transform.position.x, trans.position.y, kart.transform.position.z);
+		trans.eulerAngles = new Vector3 (trans.eulerAngles.x, kart.transform.eulerAngles.y, 0);
+
 		// position indicator on minimap
 		indicator.position = new Vector3 (kart.transform.position.x, trans.position.y - indicator_distance, kart.transform.position.z);
 

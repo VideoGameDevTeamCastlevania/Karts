@@ -52,6 +52,10 @@ public class carControl : MonoBehaviour {
 
         startline_hit = false;
         startline_time = 61.0f;
+
+		Vector3 y = rigidbody.centerOfMass;
+		y.y = -1.3f;
+		rigidbody.centerOfMass = y;
     }
 	
 	// Physics Update will be called by the engine as needed based on frame rates 

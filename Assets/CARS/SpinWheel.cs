@@ -6,13 +6,14 @@ public class SpinWheel : MonoBehaviour {
 	public WheelCollider RL, RR, FL, FR;
 	public Transform RRL, RRR, FFL, FFR, HEAD, LARM, RARM;
 	private Rigidbody RB;
-	public int toe, toe2, toe3;
+	//public int toe, toe2, toe3;
 	private float DontWaste;
+	private WheelHit onleft, onright;
 	// Use this for initialization
 	void Start () {
 		RB = GetComponent<Rigidbody> ();
 		Vector3 y = RB.centerOfMass;
-		y.y = -1.3f;
+		y.y = -1.2f;
 		RB.centerOfMass = y;
 		DontWaste = FL.steerAngle;
 	}
@@ -20,6 +21,8 @@ public class SpinWheel : MonoBehaviour {
 
 		FFL.Rotate (0,0,FL.rpm / 60 * -360 * Time.deltaTime);
 		FFR.Rotate (0,0,FR.rpm / 60 * 360 * Time.deltaTime); 
+		RRL.Rotate (0,0,RL.rpm / 60 * 360 * Time.deltaTime);
+		RRR.Rotate (0,0,RR.rpm / 60 * -360 * Time.deltaTime); 
 		if(FL.steerAngle != DontWaste) {
 						Vector3 turnL = FFL.localEulerAngles;
 						turnL.y = FL.steerAngle - 90; 
@@ -32,7 +35,7 @@ public class SpinWheel : MonoBehaviour {
 						turnL.y = FL.steerAngle;
 						HEAD.localEulerAngles = turnL;
 						DontWaste = FL.steerAngle;
-						print (Time.deltaTime);
+						
 				}
 			//WheelHit slide;
 			//FR.GetGroundHit( slide );
@@ -53,17 +56,30 @@ public class SpinWheel : MonoBehaviour {
 
 	// Update is called once per frame
 void FixedUpdate () {
-
+		//print (RR.rpm);
 		//print ("V:" + RB.velocity.magnitude);
-		if (RB.velocity.magnitude > 1) {
-						RR.motorTorque = (60 - (.8f * RB.velocity.magnitude)) * Input.GetAxis ("Vertical");
-						RL.motorTorque = (60 - (.8f * RB.velocity.magnitude)) * Input.GetAxis ("Vertical");
+		if (Input.GetAxis ("Vertical") < 0 && FR.rpm > 10) {
+						RR.brakeTorque = RL.brakeTorque = FL.brakeTorque = FR.brakeTorque = 75;
 				} else {
-			RR.motorTorque = 100 *Input.GetAxis ("Vertical");
-			RL.motorTorque = 100 * Input.GetAxis ("Vertical");
-		}	
-				
-
+						RR.brakeTorque = RL.brakeTorque = FL.brakeTorque = FR.brakeTorque = 0;
+						if (FR.GetGroundHit (out onleft) && FL.GetGroundHit (out onright)) {
+								if (onright.collider.gameObject.tag == "Road") {
+										FR.motorTorque = (60 - (.8f * RB.velocity.magnitude)) * Input.GetAxis ("Vertical");
+								} else {
+										if(FR.rpm > 200)
+											RR.brakeTorque = FR.brakeTorque = 100;
+										FR.motorTorque = (20 - (.8f * RB.velocity.magnitude)) * Input.GetAxis ("Vertical");
+								}
+							
+								if (onleft.collider.gameObject.tag == "Road") {
+										FL.motorTorque = (60 - (.8f * RB.velocity.magnitude)) * Input.GetAxis ("Vertical");
+								} else {
+										if(FL.rpm > 200)
+											RL.brakeTorque = FL.brakeTorque = 100;
+										FL.motorTorque = (20 - (.8f * RB.velocity.magnitude)) * Input.GetAxis ("Vertical");
+								}
+						}
+		}
 
 			FL.steerAngle = (25 - (.3f * RB.velocity.magnitude)) * Input.GetAxis ("Horizontal");
 			FR.steerAngle = (25 - (.3f * RB.velocity.magnitude)) * Input.GetAxis ("Horizontal");

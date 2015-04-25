@@ -1,0 +1,102 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	new file:   Assets/CARS/DOOM.blend
+#	new file:   Assets/CARS/DOOM.blend.meta
+#	modified:   Assets/CARS/SpinWheel.cs
+#	new file:   Assets/Cobblestone.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/CobbleStone Bump Spec for ball.mat
+#	new file:   Assets/Cobblestone/CobbleStone textures/CobbleStone Bump Spec for ball.mat.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/CobbleStone Bump Spec.mat
+#	new file:   Assets/Cobblestone/CobbleStone textures/CobbleStone Bump Spec.mat.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/Ground 1.png
+#	new file:   Assets/Cobblestone/CobbleStone textures/Ground 1.png.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/Ground.png
+#	new file:   Assets/Cobblestone/CobbleStone textures/Ground.png.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/Materials.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/Materials/coble stone walk road difuse normal alpha.mat
+#	new file:   Assets/Cobblestone/CobbleStone textures/Materials/coble stone walk road difuse normal alpha.mat.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/New Material 1.mat
+#	new file:   Assets/Cobblestone/CobbleStone textures/New Material 1.mat.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/New Material 2.mat
+#	new file:   Assets/Cobblestone/CobbleStone textures/New Material 2.mat.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/New Material.mat
+#	new file:   Assets/Cobblestone/CobbleStone textures/New Material.mat.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/coble stone walk road difuse normal alpha.psd
+#	new file:   Assets/Cobblestone/CobbleStone textures/coble stone walk road difuse normal alpha.psd.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/coble stone walk road normal.png
+#	new file:   Assets/Cobblestone/CobbleStone textures/coble stone walk road normal.png.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/lava___magma_texture_by_blockedgravity-d6b3aod 1.jpg
+#	new file:   Assets/Cobblestone/CobbleStone textures/lava___magma_texture_by_blockedgravity-d6b3aod 1.jpg.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/lava___magma_texture_by_blockedgravity-d6b3aod.jpg
+#	new file:   Assets/Cobblestone/CobbleStone textures/lava___magma_texture_by_blockedgravity-d6b3aod.jpg.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/red-brick-wall 1.jpg
+#	new file:   Assets/Cobblestone/CobbleStone textures/red-brick-wall 1.jpg.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/red-brick-wall.jpg
+#	new file:   Assets/Cobblestone/CobbleStone textures/red-brick-wall.jpg.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/road_texture_by_sleepybluekitty-d2xnzwu 1.jpg
+#	new file:   Assets/Cobblestone/CobbleStone textures/road_texture_by_sleepybluekitty-d2xnzwu 1.jpg.meta
+#	new file:   Assets/Cobblestone/CobbleStone textures/road_texture_by_sleepybluekitty-d2xnzwu.jpg
+#	new file:   Assets/Cobblestone/CobbleStone textures/road_texture_by_sleepybluekitty-d2xnzwu.jpg.meta
+#	new file:   Assets/Cobblestone/General info.rtf
+#	new file:   Assets/Cobblestone/General info.rtf.meta
+#	new file:   Assets/Cobblestone/cobble stone scene.meta
+#	new file:   Assets/Cobblestone/cobble stone scene.unity
+#	new file:   Assets/Cobblestone/cobble stone scene.unity.meta
+#	new file:   Assets/Cobblestone/cobble stone scene/LightmapFar-0.exr
+#	new file:   Assets/Cobblestone/cobble stone scene/LightmapFar-0.exr.meta
+#	new file:   Assets/Cobblestone/cobble stone scene/LightmapNear-0.exr
+#	new file:   Assets/Cobblestone/cobble stone scene/LightmapNear-0.exr.meta
+#	new file:   Assets/Scenes/Tutorial.unity
+#	new file:   Assets/Scenes/Tutorial.unity.meta
+#	new file:   Assets/Scripts/TUTORIAL.cs
+#	new file:   Assets/Scripts/TUTORIAL.cs.meta
+#	new file:   Assets/TL_Grass_01.meta
+#	new file:   Assets/TL_Grass_01/Materials.meta
+#	new file:   Assets/TL_Grass_01/Materials/New Material.mat
+#	new file:   Assets/TL_Grass_01/Materials/New Material.mat.meta
+#	new file:   Assets/TL_Grass_01/Materials/TL_Grass_01.mat
+#	new file:   Assets/TL_Grass_01/Materials/TL_Grass_01.mat.meta
+#	new file:   Assets/TL_Grass_01/Source Assets.meta
+#	new file:   Assets/TL_Grass_01/Source Assets/Ground_Grass_1024_01_AO.png
+#	new file:   Assets/TL_Grass_01/Source Assets/Ground_Grass_1024_01_AO.png.meta
+#	new file:   Assets/TL_Grass_01/Source Assets/Ground_Grass_1024_01_DIF.png
+#	new file:   Assets/TL_Grass_01/Source Assets/Ground_Grass_1024_01_DIF.png.meta
+#	new file:   Assets/TL_Grass_01/Source Assets/Ground_Grass_1024_01_NRM.png
+#	new file:   Assets/TL_Grass_01/Source Assets/Ground_Grass_1024_01_NRM.png.meta
+#	new file:   Assets/Tree 1_Textures.meta
+#	new file:   Assets/Tree 1_Textures/diffuse.png
+#	new file:   Assets/Tree 1_Textures/diffuse.png.meta
+#	new file:   Assets/Tree 1_Textures/normal_specular.png
+#	new file:   Assets/Tree 1_Textures/normal_specular.png.meta
+#	new file:   Assets/Tree 1_Textures/shadow.png
+#	new file:   Assets/Tree 1_Textures/shadow.png.meta
+#	new file:   Assets/Tree 1_Textures/translucency_gloss.png
+#	new file:   Assets/Tree 1_Textures/translucency_gloss.png.meta
+#	new file:   Assets/Tree_Textures.meta
+#	new file:   Assets/Tree_Textures/diffuse.png
+#	new file:   Assets/Tree_Textures/diffuse.png.meta
+#	new file:   Assets/Tree_Textures/normal_specular.png
+#	new file:   Assets/Tree_Textures/normal_specular.png.meta
+#	new file:   Assets/Tree_Textures/shadow.png
+#	new file:   Assets/Tree_Textures/shadow.png.meta
+#	new file:   Assets/Tree_Textures/translucency_gloss.png
+#	new file:   Assets/Tree_Textures/translucency_gloss.png.meta
+#	new file:   Assets/materials/Ground.mat
+#	new file:   Assets/materials/Ground.mat.meta
+#	new file:   Assets/materials/lava___magma_texture_by_blockedgravity-d6b3aod.mat
+#	new file:   Assets/materials/lava___magma_texture_by_blockedgravity-d6b3aod.mat.meta
+#	new file:   Assets/materials/red-brick-wall.mat
+#	new file:   Assets/materials/red-brick-wall.mat.meta
+#	new file:   Assets/materials/road_texture_by_sleepybluekitty-d2xnzwu.mat
+#	new file:   Assets/materials/road_texture_by_sleepybluekitty-d2xnzwu.mat.meta
+#	new file:   Assets/materials/unnamed.mat
+#	new file:   Assets/materials/unnamed.mat.meta
+#	modified:   ProjectSettings/TagManager.asset
+#
+

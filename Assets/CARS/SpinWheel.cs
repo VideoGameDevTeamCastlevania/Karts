@@ -12,7 +12,7 @@ public class SpinWheel : MonoBehaviour {
 	void Start () {
 		RB = GetComponent<Rigidbody> ();
 		Vector3 y = RB.centerOfMass;
-		y.y = -1.4f;
+		y.y = -1.3f;
 		RB.centerOfMass = y;
 		DontWaste = FL.steerAngle;
 	}
@@ -56,21 +56,18 @@ void FixedUpdate () {
 
 		//print ("V:" + RB.velocity.magnitude);
 		if (RB.velocity.magnitude > 1) {
-						RR.motorTorque = (50 - (.8f * RB.velocity.magnitude)) * Input.GetAxis ("Vertical");
-						RL.motorTorque = (50 - (.8f * RB.velocity.magnitude)) * Input.GetAxis ("Vertical");
+						RR.motorTorque = (60 - (.8f * RB.velocity.magnitude)) * Input.GetAxis ("Vertical");
+						RL.motorTorque = (60 - (.8f * RB.velocity.magnitude)) * Input.GetAxis ("Vertical");
 				} else {
 			RR.motorTorque = 100 *Input.GetAxis ("Vertical");
 			RL.motorTorque = 100 * Input.GetAxis ("Vertical");
 		}	
 				
 
-		if (RB.velocity.magnitude > 1) {
-						FL.steerAngle = (10 - (.1f * RB.velocity.magnitude)) * Input.GetAxis ("Horizontal");
-						FR.steerAngle = (10 - (.1f * RB.velocity.magnitude)) * Input.GetAxis ("Horizontal");
-				} else {
-			FL.steerAngle = 10 * Input.GetAxis ("Horizontal");
-			FR.steerAngle = 10 * Input.GetAxis ("Horizontal");		
-			}
+
+			FL.steerAngle = (25 - (.3f * RB.velocity.magnitude)) * Input.GetAxis ("Horizontal");
+			FR.steerAngle = (25 - (.3f * RB.velocity.magnitude)) * Input.GetAxis ("Horizontal");
+				
 		}
 
 		

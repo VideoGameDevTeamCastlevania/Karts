@@ -19,10 +19,16 @@ public class SceneSelect : MonoBehaviour {
 	void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.Escape)) {
-			if (!showMenu)
+			if (!showMenu) {
 				showMenu = true;
-			else
+				Time.timeScale = 0.0F;
+				//TODO: disable sound
+				//TODO: decrease music volume
+			}
+			else {
 				showMenu = false;
+				Time.timeScale = 1.0F;
+			}
 		}
 	}
 

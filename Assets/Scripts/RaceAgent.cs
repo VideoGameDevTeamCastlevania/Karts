@@ -5,7 +5,7 @@ public class RaceAgent : MonoBehaviour {
 	public GameObject targetWaypoint;
 	public Vector3 targetPosition;
 	public GameObject WaypointObj;
-	public int distranceFromWaypoint;
+	public int distranceFromWaypoint = 10;
 	private int waypointIndex  = 0;
 	NavMeshAgent agent;
 

@@ -6,14 +6,14 @@ public class SpinWheel : MonoBehaviour {
 	public WheelCollider RL, RR, FL, FR;
 	public Transform RRL, RRR, FFL, FFR, HEAD, LARM, RARM;
 	private Rigidbody RB;
-	//public int toe, toe2, toe3;
+	public int toe, toe2, toe3;
 	private float DontWaste;
 	private WheelHit onleft, onright;
 	// Use this for initialization
 	void Start () {
 		RB = GetComponent<Rigidbody> ();
 		Vector3 y = RB.centerOfMass;
-		y.y = -1.2f;
+		y.y = -1.3f;
 		RB.centerOfMass = y;
 		DontWaste = FL.steerAngle;
 	}
@@ -21,13 +21,30 @@ public class SpinWheel : MonoBehaviour {
 
 		FFL.Rotate (0,0,FL.rpm / 60 * -360 * Time.deltaTime);
 		FFR.Rotate (0,0,FR.rpm / 60 * 360 * Time.deltaTime); 
-		RRL.Rotate (0,0,RL.rpm / 60 * 360 * Time.deltaTime);
-		RRR.Rotate (0,0,RR.rpm / 60 * -360 * Time.deltaTime); 
-		if(FL.steerAngle != DontWaste) {
+		RRL.Rotate (0,0,RL.rpm / 60 * -360 * Time.deltaTime);
+		RRR.Rotate (0,0,RR.rpm / 60 * 360 * Time.deltaTime); 
+		if (transform.gameObject.name == "GirlScout") {
+			if (FL.steerAngle != DontWaste) {
+				Vector3 turnL = FFL.localEulerAngles;
+				turnL.x = FL.steerAngle; 
+				FFL.localEulerAngles = turnL;
+				turnL.x = FL.steerAngle - 180; 
+				FFR.localEulerAngles = turnL;
+				
+				turnL.z = FL.steerAngle;
+				turnL.x = FL.steerAngle/3 - 90;
+				turnL.y = FL.steerAngle/5;
+				HEAD.localEulerAngles = turnL;
+				DontWaste = FL.steerAngle;
+				
+			}
+		}
+		if (transform.gameObject.name == "Marsian") {
+				if (FL.steerAngle != DontWaste) {
 						Vector3 turnL = FFL.localEulerAngles;
-						turnL.y = FL.steerAngle - 90; 
+						turnL.x = FL.steerAngle; 
 						FFL.localEulerAngles = turnL;
-						turnL.y = FL.steerAngle + 90; 
+						turnL.x = FL.steerAngle - 180; 
 						FFR.localEulerAngles = turnL;
 
 						turnL.z = FL.steerAngle + 2;
@@ -35,8 +52,27 @@ public class SpinWheel : MonoBehaviour {
 						turnL.y = FL.steerAngle;
 						HEAD.localEulerAngles = turnL;
 						DontWaste = FL.steerAngle;
-						
+				
 				}
+		}
+		if (transform.gameObject.name == "Dog") {
+
+			Vector3 turnL = FFL.localEulerAngles;
+			turnL.x = FL.steerAngle; 
+			FFL.localEulerAngles = turnL;
+			turnL.x = FL.steerAngle - 180; 
+			FFR.localEulerAngles = turnL;
+
+				turnL = FFL.localEulerAngles;
+				turnL.x = FL.steerAngle; 
+				turnL.z = FL.steerAngle/5 + 2;
+				turnL.x = -FL.steerAngle/.6f + 2;
+				turnL.y = FL.steerAngle;
+				HEAD.localEulerAngles = turnL;
+
+				
+			}
+		}
 			//WheelHit slide;
 			//FR.GetGroundHit( slide );
 			
@@ -50,7 +86,7 @@ public class SpinWheel : MonoBehaviour {
 			//{
 				//skid.gameObject.active = false;
 			//}
-}
+
 
 
 

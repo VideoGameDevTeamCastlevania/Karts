@@ -16,7 +16,6 @@ public class CharMapSpawnThing : MonoBehaviour {
 
 	public void setChar (string selectChar) {;
 		charSelection = selectChar;
-		print ("Select Char is: " + charSelection);
 
 	}
 	
@@ -45,23 +44,23 @@ public class CharMapSpawnThing : MonoBehaviour {
 		GameObject AI2;
 		if (character == "Girl") {
 			player = Instantiate (Resources.Load("GirlScout"), playerSpawn.transform.position, playerSpawn.transform.rotation) as GameObject;
-			AI1 = Instantiate(Resources.Load("Dog"), AISpawn[1].transform.position, AISpawn[1].transform.rotation) as GameObject;
+			AI1 = Instantiate(Resources.Load("DogAI"), AISpawn[1].transform.position, AISpawn[1].transform.rotation) as GameObject;
 			AI1.tag = "AI";
-			AI2 = Instantiate(Resources.Load("Marsian"), AISpawn[2].transform.position, AISpawn[2].transform.rotation) as GameObject;
+			AI2 = Instantiate(Resources.Load("MarsianAI"), AISpawn[2].transform.position, AISpawn[2].transform.rotation) as GameObject;
 			AI2.tag = "AI";
 		}
 		if (character == "Dog") {
 			player = Instantiate (Resources.Load("Dog"), playerSpawn.transform.position, playerSpawn.transform.rotation) as GameObject;
-			AI1 = Instantiate(Resources.Load("GirlScout"), AISpawn[1].transform.position, AISpawn[1].transform.rotation) as GameObject;
+			AI1 = Instantiate(Resources.Load("GirlScoutAI"), AISpawn[1].transform.position, AISpawn[1].transform.rotation) as GameObject;
 			AI1.tag = "AI";
-			AI2 = Instantiate(Resources.Load("Marsian"), AISpawn[2].transform.position, AISpawn[2].transform.rotation) as GameObject;
+			AI2 = Instantiate(Resources.Load("MarsianAI"), AISpawn[2].transform.position, AISpawn[2].transform.rotation) as GameObject;
 			AI2.tag = "AI";
 		}
 		if (character == "Marsian") {
 			player = Instantiate (Resources.Load("Marsian"), playerSpawn.transform.position,  playerSpawn.transform.rotation)  as GameObject;
-			AI1 = Instantiate(Resources.Load("GirlScout"), AISpawn[1].transform.position, AISpawn[1].transform.rotation) as GameObject;
+			AI1 = Instantiate(Resources.Load("GirlScoutAI"), AISpawn[1].transform.position, AISpawn[1].transform.rotation) as GameObject;
 			AI1.tag = "AI";
-			AI2 = Instantiate(Resources.Load("Dog"), AISpawn[2].transform.position, AISpawn[2].transform.rotation) as GameObject;
+			AI2 = Instantiate(Resources.Load("DogAI"), AISpawn[2].transform.position, AISpawn[2].transform.rotation) as GameObject;
 			AI2.tag = "AI";
 		}
 

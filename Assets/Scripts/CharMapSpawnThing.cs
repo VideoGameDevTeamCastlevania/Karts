@@ -16,7 +16,16 @@ public class CharMapSpawnThing : MonoBehaviour {
 	}
 
 	void OnLevelWasLoaded(int index) {
-		if (index == 1) {
+		if (index == 7) {
+			spawnThings(charSelection);
+		}
+		if (index == 8) {
+			spawnThings(charSelection);
+		}
+		if (index == 9) {
+			spawnThings(charSelection);
+		}
+		if (index == 10) {
 			spawnThings(charSelection);
 		}
 	}
@@ -25,8 +34,8 @@ public class CharMapSpawnThing : MonoBehaviour {
 		mapSelectNumber = mapSelect;
 	}
 
-	public void confirm(int level) {
-		Application.LoadLevel (level);
+	public void confirm() {
+		Application.LoadLevel (mapSelectNumber);
 	}
 
 	public void setChar (string selectChar) {;

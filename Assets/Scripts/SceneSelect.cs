@@ -4,6 +4,7 @@ using System.Collections;
 public class SceneSelect : MonoBehaviour {
 
     public Texture2D boxbg;
+	public GameObject options_menu;
 
     private string main_menu_label = "Main Menu";
     private string options_label = "Options";
@@ -22,8 +23,6 @@ public class SceneSelect : MonoBehaviour {
 			if (!showMenu) {
 				showMenu = true;
 				Time.timeScale = 0.0F;
-				//TODO: disable sound
-				//TODO: decrease music volume
 			}
 			else {
 				showMenu = false;
@@ -43,7 +42,7 @@ public class SceneSelect : MonoBehaviour {
 				showMenu = false;
 			}
 			if (GUI.Button (new Rect (10, 50, 125, 30), options_label)) {
-//                Spawn Options menu here
+				options_menu.SetActive(true);
 			}
 			if (GUI.Button (new Rect (10, 90, 125, 30), restart_label)) {
 				Time.timeScale = 1.0F;

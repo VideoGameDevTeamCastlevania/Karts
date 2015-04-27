@@ -3,32 +3,40 @@ using System.Collections;
 
 public class CharMapSpawnThing : MonoBehaviour {
 	private string charSelection;
-	private string mapSelection;
 
 	// Use this for initialization
 	void Start () {
-	
-	}
-
-	void awake() {
 		DontDestroyOnLoad (transform.gameObject);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 	
 	}
 
+	public void setChar (string selectChar) {
+		selectChar = charSelection;
+
+	}
+	
+	// Need to find what level is what;
 	public void loadRollingHills1() {
+		Application.LoadLevel(0);
+		spawnThings (charSelection);
 	}
 
 	public void loadRollingHills2(){
+		Application.LoadLevel(0);
+		spawnThings (charSelection);
 	}
 
 	public void loadMountains(){
+		Application.LoadLevel(0);
+		spawnThings (charSelection);
+
 	}
 
-	public void spawn(string character) {
+	public void spawnThings(string character) {
 		GameObject playerSpawn = GameObject.FindGameObjectWithTag ("PlayerSpawn");
 		GameObject[] AISpawn = GameObject.FindGameObjectsWithTag ("AISpawn");
 		GameObject player;

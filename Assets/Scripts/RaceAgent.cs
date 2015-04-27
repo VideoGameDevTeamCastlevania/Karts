@@ -13,6 +13,8 @@ public class RaceAgent : MonoBehaviour {
 	void Start () {
 		agent = GetComponent<NavMeshAgent>();
 		agent.angularSpeed = 10000;
+		agent.speed = 50;
+		agent.acceleration = 30;
 		WaypointObj.GetComponent<WaypointManager> ();
 		targetWaypoint = WaypointObj.GetComponent<WaypointManager> ().Waypoints [waypointIndex];
 		targetPosition = targetWaypoint.transform.position;

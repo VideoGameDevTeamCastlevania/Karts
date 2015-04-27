@@ -22,7 +22,6 @@ public class RaceAgent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		agent.updateRotation = true;
 		if ((Vector3.Distance (transform.position, targetPosition) < distranceFromWaypoint) & (waypointIndex != WaypointObj.GetComponent<WaypointManager> ().Waypoints.Length - 1)) {
 			waypointIndex += 1;
 			targetWaypoint = WaypointObj.GetComponent<WaypointManager> ().Waypoints [waypointIndex];

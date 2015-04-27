@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CharMapSpawnThing : MonoBehaviour {
 	private static string charSelection;
+	private static int mapSelectNumber;
 	private int level_index;
 
 	// Use this for initialization
@@ -20,26 +21,17 @@ public class CharMapSpawnThing : MonoBehaviour {
 		}
 	}
 
+	public void setMap(int mapSelect) {
+		mapSelectNumber = mapSelect;
+	}
+
+	public void confirm(int level) {
+		Application.LoadLevel (level);
+	}
+
 	public void setChar (string selectChar) {;
 		charSelection = selectChar;
-		loadRollingHills1 ();
-	}
-	
-	// Need to find what level is what;
-	public void loadRollingHills1() {
-		Application.LoadLevel("Desert Track");
-		OnLevelWasLoaded (Application.loadedLevel);
-	}
-
-	public void loadRollingHills2(){
-		Application.LoadLevel(1);
-		spawnThings (charSelection);
-	}
-
-	public void loadMountains(){
-		Application.LoadLevel(1);
-		spawnThings (charSelection);
-
+		Application.LoadLevel("MapSelect");
 	}
 
 	public void spawnThings(string character) {

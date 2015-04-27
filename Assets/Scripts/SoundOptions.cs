@@ -12,6 +12,7 @@ public class SoundOptions : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		DontDestroyOnLoad (transform.gameObject);
 		music_volume = 1.0F;
 		sound_volume = 1.0F;
 		level_index = Application.loadedLevel;

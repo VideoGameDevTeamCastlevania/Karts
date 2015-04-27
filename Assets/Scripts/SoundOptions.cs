@@ -15,13 +15,14 @@ public class SoundOptions : MonoBehaviour {
 		music_volume = 1.0F;
 		sound_volume = 1.0F;
 		level_index = Application.loadedLevel;
+		setup_music_options ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Application.loadedLevel != level_index) {
 			level_index = Application.loadedLevel;
-			setup_music();
+			setup_music_options();
 		}
 		AudioListener.volume = sound_volume;
 		music_source.volume = music_volume;
@@ -37,7 +38,7 @@ public class SoundOptions : MonoBehaviour {
 		sound_volume = volume;
 	}
 
-	void setup_music () {
+	void setup_music_options () {
 		main_camera = GameObject.FindWithTag ("MainCamera");
 		music_source = main_camera.GetComponent<AudioSource> ();
 		music_source.ignoreListenerVolume = true;

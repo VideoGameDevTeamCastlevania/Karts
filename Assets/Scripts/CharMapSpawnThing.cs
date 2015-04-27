@@ -16,14 +16,12 @@ public class CharMapSpawnThing : MonoBehaviour {
 
 	void OnLevelWasLoaded(int index) {
 		if (index == 1) {
-			print ("Character selection at load is: " + charSelection);
 			spawnThings(charSelection);
 		}
 	}
 
 	public void setChar (string selectChar) {;
 		charSelection = selectChar;
-		print ("Character =" + charSelection);
 		loadRollingHills1 ();
 	}
 	

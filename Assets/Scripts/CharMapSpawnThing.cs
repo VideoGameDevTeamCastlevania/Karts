@@ -14,8 +14,9 @@ public class CharMapSpawnThing : MonoBehaviour {
 	
 	}
 
-	public void setChar (string selectChar) {
-		selectChar = charSelection;
+	public void setChar (string selectChar) {;
+		charSelection = selectChar;
+		print ("Select Char is: " + charSelection);
 
 	}
 	

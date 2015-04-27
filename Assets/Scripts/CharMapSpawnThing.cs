@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class CharMapSpawnThing : MonoBehaviour {
-	private string charSelection;
+	private static string charSelection;
+	private int level_index;
 
 	// Use this for initialization
 	void Start () {
@@ -11,59 +12,72 @@ public class CharMapSpawnThing : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	
+	}
+
+	void OnLevelWasLoaded(int index) {
+		if (index == 1) {
+			spawnThings(charSelection);
+		}
 	}
 
 	public void setChar (string selectChar) {;
 		charSelection = selectChar;
-
+		loadRollingHills1 ();
 	}
 	
 	// Need to find what level is what;
 	public void loadRollingHills1() {
-		Application.LoadLevel(0);
-		spawnThings (charSelection);
+		Application.LoadLevel("Desert Track");
+		OnLevelWasLoaded (Application.loadedLevel);
 	}
 
 	public void loadRollingHills2(){
-		Application.LoadLevel(0);
+		Application.LoadLevel(1);
 		spawnThings (charSelection);
 	}
 
 	public void loadMountains(){
-		Application.LoadLevel(0);
+		Application.LoadLevel(1);
 		spawnThings (charSelection);
 
 	}
 
 	public void spawnThings(string character) {
 		GameObject playerSpawn = GameObject.FindGameObjectWithTag ("PlayerSpawn");
+		if (!playerSpawn) {
+			print("No player spawn found");
+		}
 		GameObject[] AISpawn = GameObject.FindGameObjectsWithTag ("AISpawn");
+		if (AISpawn.Length == 0) {
+			print ("No AI spawn found");
+		}
 		GameObject player;
 		GameObject AI1;
 		GameObject AI2;
+		print(playerSpawn.transform.position.x.ToString());
 		if (character == "Girl") {
 			player = Instantiate (Resources.Load("GirlScout"), playerSpawn.transform.position, playerSpawn.transform.rotation) as GameObject;
-			AI1 = Instantiate(Resources.Load("DogAI"), AISpawn[1].transform.position, AISpawn[1].transform.rotation) as GameObject;
+			AI1 = Instantiate(Resources.Load("DogAI"), AISpawn[0].transform.position, AISpawn[0].transform.rotation) as GameObject;
 			AI1.tag = "AI";
-			AI2 = Instantiate(Resources.Load("MarsianAI"), AISpawn[2].transform.position, AISpawn[2].transform.rotation) as GameObject;
+			AI2 = Instantiate(Resources.Load("MarsianAI"), AISpawn[1].transform.position, AISpawn[1].transform.rotation) as GameObject;
 			AI2.tag = "AI";
 		}
 		if (character == "Dog") {
 			player = Instantiate (Resources.Load("Dog"), playerSpawn.transform.position, playerSpawn.transform.rotation) as GameObject;
-			AI1 = Instantiate(Resources.Load("GirlScoutAI"), AISpawn[1].transform.position, AISpawn[1].transform.rotation) as GameObject;
+			print ("SOmething should be here");
+			AI1 = Instantiate(Resources.Load("GirlScoutAI"), AISpawn[0].transform.position, AISpawn[0].transform.rotation) as GameObject;
 			AI1.tag = "AI";
-			AI2 = Instantiate(Resources.Load("MarsianAI"), AISpawn[2].transform.position, AISpawn[2].transform.rotation) as GameObject;
+			AI2 = Instantiate(Resources.Load("MarsianAI"), AISpawn[1].transform.position, AISpawn[1].transform.rotation) as GameObject;
 			AI2.tag = "AI";
 		}
 		if (character == "Marsian") {
-			player = Instantiate (Resources.Load("Marsian"), playerSpawn.transform.position,  playerSpawn.transform.rotation)  as GameObject;
-			AI1 = Instantiate(Resources.Load("GirlScoutAI"), AISpawn[1].transform.position, AISpawn[1].transform.rotation) as GameObject;
+			player = Instantiate (Resources.Load ("Marsian"), playerSpawn.transform.position, playerSpawn.transform.rotation)  as GameObject;
+			AI1 = Instantiate (Resources.Load ("GirlScoutAI"), AISpawn [0].transform.position, AISpawn [0].transform.rotation) as GameObject;
 			AI1.tag = "AI";
-			AI2 = Instantiate(Resources.Load("DogAI"), AISpawn[2].transform.position, AISpawn[2].transform.rotation) as GameObject;
+			AI2 = Instantiate (Resources.Load ("DogAI"), AISpawn [1].transform.position, AISpawn [1].transform.rotation) as GameObject;
 			AI2.tag = "AI";
+		} else {
+			print ("Character is = " + character);
 		}
-
 	}
-
 }

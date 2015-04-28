@@ -34,7 +34,9 @@ public class CharMapSpawnThing : MonoBehaviour {
 	}
 
 	public void confirm() {
-		Application.LoadLevel (mapSelectNumber);
+		if (mapSelectNumber > 0) {
+			Application.LoadLevel (mapSelectNumber);
+		}
 	}
 
 	public void setChar (string selectChar) {;

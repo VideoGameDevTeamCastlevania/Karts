@@ -43,13 +43,16 @@ public class SceneSelect : MonoBehaviour {
 			}
 			if (GUI.Button (new Rect (10, 50, 125, 30), options_label)) {
 				options_menu.SetActive(true);
+				showMenu = false;
 			}
 			if (GUI.Button (new Rect (10, 90, 125, 30), restart_label)) {
 				Time.timeScale = 1.0F;
+				showMenu = false;
 				Application.LoadLevel (Application.loadedLevelName);
 			}
 			if (GUI.Button (new Rect (10, 130, 125, 30), "Quit")) {
 				Time.timeScale = 1.0F;
+				showMenu = false;
 				Application.LoadLevel("TitleScreen");
 			}
 			GUI.EndGroup ();

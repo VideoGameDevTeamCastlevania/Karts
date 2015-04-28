@@ -120,7 +120,7 @@ public class raceManager : MonoBehaviour {
                     tc.UpdateTimer();
                     float current_time = tc.GetTime();
                     Debug.Log("timer:" + current_time);
-                    if (current_time < 2f)
+                    if (current_time < 5f)
                     {
                         output_text.text = lap_string;
                     }

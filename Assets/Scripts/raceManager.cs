@@ -20,6 +20,9 @@ public class raceManager : MonoBehaviour {
     private int raceMode; // 0 - waiting for player to start, 1 - start count down, 2 - race in progress
     private int countDown;
     private int winner;
+    private string winner_string;
+    private string lap_string;
+    private bool show_lap_count;
 
     private LapWayPointDataStore lapWayPoints;
 
@@ -103,17 +106,32 @@ public class raceManager : MonoBehaviour {
             // do something for the race while it is being ran...not sure what at this point
             if (raceOver)
             {
-                switch (winner)
+                output_text.text = winner_string;
+            }
+            else if (lap_string != "")
+            {
+                if (show_lap_count == false)
                 {
-                    case 1: output_text.text = "You won the race!";
-                        break;
-                    case 2: output_text.text = "AI1 won the race!";
-                        break;
-                    case 3: output_text.text = "AI2 won the race!";
-                        break;
-                    case 4: output_text.text = "AI3 won the race!";
-                        break;
+                    tc.ResetTimer();
+                    show_lap_count = true;
                 }
+                else
+                {
+                    tc.UpdateTimer();
+                    float current_time = tc.GetTime();
+                    Debug.Log("timer:" + current_time);
+                    if (current_time < 2f)
+                    {
+                        output_text.text = lap_string;
+                    }
+                    else
+                    {
+                        show_lap_count = false;
+                        lap_string = "";
+                        output_text.text = lap_string;
+                    }
+                }
+
             }
         }
 	}
@@ -129,6 +147,10 @@ public class raceManager : MonoBehaviour {
         raceMode = 0;
         countDown = 3;
         winner = 0;
+
+        lap_string = "";
+
+        show_lap_count = false;
 
         lapWayPoints.init();
 
@@ -162,8 +184,9 @@ public class raceManager : MonoBehaviour {
                 Debug.Log("You won the race!");
                 winner = 1;
             }
-            //else
-            //    Debug.Log("Player crossed the finish line! Lap:" + player_lap_count);
+            else
+                //Debug.Log("Player crossed the finish line! Lap:" + player_lap_count);
+                lap_string = "Lap " + player_lap_count;
         }
         else if (!lapWayPoints.isKartNull(1) &&
             lapWayPoints.isKartEqual(other.gameObject.transform.parent.gameObject, 1) &&
@@ -178,11 +201,12 @@ public class raceManager : MonoBehaviour {
             {
                 raceOver = true;
                 Debug.Log(lapWayPoints.getKartName(1) + " won the race!");
-                output_text.text = lapWayPoints.getKartName(1) + " won the race!";
+                winner_string = lapWayPoints.getKartName(1) + " won the race!";
                 winner = 2;
             }
-            //else
-            //    Debug.Log(lapWayPoints.getKartName(1) + " crossed the finish line! Lap:" + ai1_lap_count);
+            else
+                //    Debug.Log(lapWayPoints.getKartName(1) + " crossed the finish line! Lap:" + ai1_lap_count);
+                lap_string = lapWayPoints.getKartName(1) + " is on lap " + ai1_lap_count;
         }
         else if (!lapWayPoints.isKartNull(2) &&
             lapWayPoints.isKartEqual(other.gameObject.transform.parent.gameObject, 2) &&
@@ -195,11 +219,12 @@ public class raceManager : MonoBehaviour {
             {
                 raceOver = true;
                 Debug.Log(lapWayPoints.getKartName(2) + " won the race!");
-                output_text.text = lapWayPoints.getKartName(2) + " won the race!";
+                winner_string = lapWayPoints.getKartName(2) + " won the race!";
                 winner = 3;
             }
-            //else
+            else
             //    Debug.Log(lapWayPoints.getKartName(2) + " crossed the finish line! Lap:" + ai2_lap_count);
+                lap_string = lapWayPoints.getKartName(2) + " is on lap " + ai2_lap_count;
         }
         else if (!lapWayPoints.isKartNull(3) &&
             lapWayPoints.isKartEqual(other.gameObject.transform.parent.gameObject, 3) &&
@@ -212,11 +237,12 @@ public class raceManager : MonoBehaviour {
             {
                 raceOver = true;
                 Debug.Log(lapWayPoints.getKartName(3) + " won the race!");
-                output_text.text = lapWayPoints.getKartName(3) + " won the race!";
+                winner_string = lapWayPoints.getKartName(3) + " won the race!";
                 winner = 4;
             }
-            //else
+            else
             //    Debug.Log(lapWayPoints.getKartName(3) + " crossed the finish line! Lap:" + ai3_lap_count);
+                lap_string = lapWayPoints.getKartName(3) + " is on lap " + ai3_lap_count;
         }
         else
         {

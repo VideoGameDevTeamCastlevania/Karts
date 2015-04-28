@@ -16,7 +16,7 @@ public class RaceAgent : MonoBehaviour {
 		WaypointObj.GetComponent<WaypointManager> ();
 		agent.angularSpeed = 10000;
 		agent.speed = 45; // 50 is where the player's speed limit is, but players control is less than that of AI.
-		agent.acceleration = 15; // Seems to be exactly right. 
+		agent.acceleration = 12; // Seems to be exactly right for a competitive AI. 
 		agent.baseOffset = 1.5f; // 2 literally makes the AI fly. Amazing.
 		agent.radius = 4.5f; // Radius of collision box for AI.
 		targetWaypoint = WaypointObj.GetComponent<WaypointManager> ().Waypoints [waypointIndex]; //Set taret to first waypoint.

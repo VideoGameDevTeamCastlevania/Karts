@@ -17,6 +17,8 @@ public class SpinWheel : MonoBehaviour {
 		y.y = -1.3f;
 		RB.centerOfMass = y;
 		DontWaste = FL.steerAngle;
+		RR.suspensionDistance = RL.suspensionDistance = 0.4f;
+		FR.suspensionDistance = FL.suspensionDistance = 0.1f;
 	}
 	void Update(){
 		

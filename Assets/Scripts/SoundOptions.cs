@@ -7,24 +7,20 @@ public class SoundOptions : MonoBehaviour {
 	
 	private AudioSource music_source;
 	private GameObject main_camera;
-
-	private int level_index;
+	
 
 	// Use this for initialization
 	void Start () {
 		DontDestroyOnLoad (transform.gameObject);
 		music_volume = 1.0F;
 		sound_volume = 1.0F;
-		level_index = Application.loadedLevel;
-		setup_music_options ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Application.loadedLevel != level_index) {
-			level_index = Application.loadedLevel;
-			setup_music_options();
-		}
+		main_camera = GameObject.FindWithTag ("MainCamera");
+		music_source = main_camera.GetComponent<AudioSource> ();
+		music_source.ignoreListenerVolume = true;
 		AudioListener.volume = sound_volume;
 		music_source.volume = music_volume;
 	}
@@ -37,11 +33,5 @@ public class SoundOptions : MonoBehaviour {
 	public void setSoundVolume (float volume)
 	{
 		sound_volume = volume;
-	}
-
-	void setup_music_options () {
-		main_camera = GameObject.FindWithTag ("MainCamera");
-		music_source = main_camera.GetComponent<AudioSource> ();
-		music_source.ignoreListenerVolume = true;
 	}
 }

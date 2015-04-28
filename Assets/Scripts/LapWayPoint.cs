@@ -3,10 +3,6 @@ using System.Collections;
 
 public class LapWayPoint : MonoBehaviour {
 
-    public GameObject player;
-    public GameObject AI1;
-    public GameObject AI2;
-    public GameObject AI3;
     public int WayPointIndex;
 
 
@@ -28,26 +24,32 @@ public class LapWayPoint : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.transform.parent != null)
-            Debug.Log("waypoint:" + WayPointIndex + " collided with " + other.gameObject.transform.parent.tag);
+        { }
+        //    Debug.Log("waypoint:" + WayPointIndex + " collided with " + other.gameObject.transform.parent.tag + " name:" + other.gameObject.transform.parent.name);
         else return;
 
-        if (player != null && other.gameObject.transform.parent.gameObject == player.gameObject &&
-            other.gameObject.name == "Body")
+        if (!lapWayPoints.isKartNull(0) && 
+            lapWayPoints.isKartEqual(other.gameObject.transform.parent.gameObject, 0) && 
+            other.gameObject.name == "GameObject")
         {
+//            Debug.Log("Player hit waypoint:" + WayPointIndex);
             lapWayPoints.bumpWaypointCount(0, WayPointIndex);
         }
-        else if (AI1 != null && other.gameObject.transform.parent.gameObject == AI1.gameObject &&
-            other.gameObject.name == "Body")
+        else if (!lapWayPoints.isKartNull(1) &&
+            lapWayPoints.isKartEqual(other.gameObject.transform.parent.gameObject, 1) &&
+            other.gameObject.name == "GameObject")
         {
             lapWayPoints.bumpWaypointCount(1, WayPointIndex);
         }
-        else if (AI2 != null && other.gameObject.transform.parent.gameObject == AI2.gameObject &&
-            other.gameObject.name == "Body")
+        else if (!lapWayPoints.isKartNull(2) &&
+            lapWayPoints.isKartEqual(other.gameObject.transform.parent.gameObject, 2) &&
+            other.gameObject.name == "GameObject")
         {
             lapWayPoints.bumpWaypointCount(2, WayPointIndex);
         }
-        else if (AI3 != null && other.gameObject.transform.parent.gameObject == AI3.gameObject &&
-            other.gameObject.name == "Body")
+        else if (!lapWayPoints.isKartNull(3) &&
+            lapWayPoints.isKartEqual(other.gameObject.transform.parent.gameObject, 3) &&
+            other.gameObject.name == "GameObject")
         {
             lapWayPoints.bumpWaypointCount(3, WayPointIndex);
         }

@@ -4,11 +4,6 @@ using System.Collections;
 
 public class raceManager : MonoBehaviour {
 
-    public GameObject player;
-    public GameObject AI1;
-    public GameObject AI2;
-    public GameObject AI3;
-
     public Text output_text;
 
     public AudioSource countdown_sound;
@@ -36,12 +31,12 @@ public class raceManager : MonoBehaviour {
         tc = (TimerClass)ScriptableObject.CreateInstance("TimerClass");
         tc.setAvgWindow(3);
 
-        if (player == null) Debug.Log("player is NULL");
-        if (AI1 == null) Debug.Log("AI1 is NULL");
-        if (AI2 == null) Debug.Log("AI2 is NULL");
-        if (AI3 == null) Debug.Log("AI3 is NULL");
-
         init();
+
+        if (lapWayPoints.isKartNull(0)) Debug.Log("player is NULL");
+        if (lapWayPoints.isKartNull(1)) Debug.Log("AI1 is NULL");
+        if (lapWayPoints.isKartNull(2)) Debug.Log("AI2 is NULL");
+        if (lapWayPoints.isKartNull(3)) Debug.Log("AI3 is NULL");
     }
 	
 	// Update is called once per frame
@@ -64,6 +59,12 @@ public class raceManager : MonoBehaviour {
 
                 countdown_sound.volume = 4f;
                 countdown_sound.Play();
+
+                // grab the player by the tag
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                if (player != null) lapWayPoints.setKartGameObject(player, 0);
+
+                Debug.Log("Player Index:" + lapWayPoints.getKartIndex(player));
             }
         }
         else if (raceMode == 1)
@@ -138,12 +139,19 @@ public class raceManager : MonoBehaviour {
     {
         if (other.gameObject.transform.parent != null)
         { }
-        //            Debug.Log("raceManager collided with " + other.gameObject.transform.parent.tag);
+        //            Debug.Log("raceManager collided with " + other.gameObject.transform.parent.tag + " Name:" + other.gameObject.transform.parent.name);
         else return;
 
-        if (player != null &&
-            other.gameObject.transform.parent.gameObject == player.gameObject &&
-            other.gameObject.name == "Body" &&
+        // check to see if the kart has been added to the kart list yet
+        //  the collider has to be "Body"
+        if (other.gameObject.name == "GameObject")
+        {
+            lapWayPoints.addKart(other.gameObject.transform.parent.gameObject);
+        }
+
+        if ( !lapWayPoints.isKartNull(0) &&
+            lapWayPoints.isKartEqual(other.gameObject.transform.parent.gameObject, 0) &&
+            other.gameObject.name == "GameObject" &&
             lapWayPoints.allWaypointsHit(0) == true)
         {
             lapWayPoints.clearWaypoints(0);
@@ -154,12 +162,12 @@ public class raceManager : MonoBehaviour {
                 Debug.Log("You won the race!");
                 winner = 1;
             }
-            else
-                Debug.Log("Player crossed the finish line! Lap:" + player_lap_count);
+            //else
+            //    Debug.Log("Player crossed the finish line! Lap:" + player_lap_count);
         }
-        else if (AI1 != null &&
-            other.gameObject.transform.parent.gameObject == AI1.gameObject &&
-            other.gameObject.name == "Body" &&
+        else if (!lapWayPoints.isKartNull(1) &&
+            lapWayPoints.isKartEqual(other.gameObject.transform.parent.gameObject, 1) &&
+            other.gameObject.name == "GameObject" &&
             lapWayPoints.allWaypointsHit(1) == true)
         {
             //Debug.Log(other.gameObject.name + " crossed the finish line. Parent:" + other.gameObject.transform.parent.name + " leftLine:" + ai1_left_line);
@@ -169,16 +177,16 @@ public class raceManager : MonoBehaviour {
             if (ai1_lap_count == 3 && raceOver == false)
             {
                 raceOver = true;
-                Debug.Log("AI1 won the race!");
-                output_text.text = "AI1 won the race!";
+                Debug.Log(lapWayPoints.getKartName(1) + " won the race!");
+                output_text.text = lapWayPoints.getKartName(1) + " won the race!";
                 winner = 2;
             }
-            else
-                Debug.Log("AI1 crossed the finish line! Lap:" + ai1_lap_count);
+            //else
+            //    Debug.Log(lapWayPoints.getKartName(1) + " crossed the finish line! Lap:" + ai1_lap_count);
         }
-        else if (AI2 != null &&
-            other.gameObject.transform.parent.gameObject == AI2.gameObject &&
-            other.gameObject.name == "Body" &&
+        else if (!lapWayPoints.isKartNull(2) &&
+            lapWayPoints.isKartEqual(other.gameObject.transform.parent.gameObject, 2) &&
+            other.gameObject.name == "GameObject" &&
             lapWayPoints.allWaypointsHit(2) == true)
         {
             lapWayPoints.clearWaypoints(2);
@@ -186,16 +194,16 @@ public class raceManager : MonoBehaviour {
             if (ai2_lap_count == 3 && raceOver == false)
             {
                 raceOver = true;
-                Debug.Log("AI2 won the race!");
-                output_text.text = "AI2 won the race!";
+                Debug.Log(lapWayPoints.getKartName(2) + " won the race!");
+                output_text.text = lapWayPoints.getKartName(2) + " won the race!";
                 winner = 3;
             }
-            else
-                Debug.Log("AI2 crossed the finish line! Lap:" + ai2_lap_count);
+            //else
+            //    Debug.Log(lapWayPoints.getKartName(2) + " crossed the finish line! Lap:" + ai2_lap_count);
         }
-        else if (AI3 != null &&
-            other.gameObject.transform.parent.gameObject == AI3.gameObject &&
-            other.gameObject.name == "Body" &&
+        else if (!lapWayPoints.isKartNull(3) &&
+            lapWayPoints.isKartEqual(other.gameObject.transform.parent.gameObject, 3) &&
+            other.gameObject.name == "GameObject" &&
             lapWayPoints.allWaypointsHit(3) == true)
         {
             lapWayPoints.clearWaypoints(3);
@@ -203,12 +211,12 @@ public class raceManager : MonoBehaviour {
             if (ai3_lap_count == 3 && raceOver == false)
             {
                 raceOver = true;
-                Debug.Log("AI3 won the race!");
-                output_text.text = "AI3 won the race!";
+                Debug.Log(lapWayPoints.getKartName(3) + " won the race!");
+                output_text.text = lapWayPoints.getKartName(3) + " won the race!";
                 winner = 4;
             }
-            else
-                Debug.Log("AI3 crossed the finish line! Lap:" + ai3_lap_count);
+            //else
+            //    Debug.Log(lapWayPoints.getKartName(3) + " crossed the finish line! Lap:" + ai3_lap_count);
         }
         else
         {

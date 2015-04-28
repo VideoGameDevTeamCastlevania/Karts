@@ -15,7 +15,7 @@ public class MapSelectScript : MonoBehaviour {
 	void Update () {
 		
 	}
-
+	//  Functions to update map Sprites, fairly simple. 
 	public void onClickMap1() {
 		targetSprite = Resources.Load ("DesertTrack", typeof(Sprite)) as Sprite;
 		mapImage.sprite = targetSprite;

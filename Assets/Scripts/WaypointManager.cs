@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class WaypointManager : MonoBehaviour {
-	public GameObject[] Waypoints;
+	public GameObject[] Waypoints; // 
 
 	// Use this for initialization
 	void Start () {

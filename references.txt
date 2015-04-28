@@ -1,0 +1,39 @@
+==3D MODELS==
+ROBOT
+http://www.blendswap.com/blends/view/73069
+
+GIRL
+http://www.blendswap.com/blends/view/42187
+
+BANDICOOT
+http://www.blendswap.com/blends/view/12301
+
+
+==MUSIC==
+Happy Arcade Tune
+http://opengameart.org/content/happy-arcade-tune
+
+Track 3 from pack
+http://opengameart.org/content/9-dark-driving-bgms-from-crowd-crawl-quest
+The Wzzard (twitter: @TheWzzard)
+
+http://opengameart.org/content/fpm-heroic-intrusion
+Patrick de Arteaga
+
+Mirage
+http://opengameart.org/content/mirage
+
+Die Ruhe vor dem Sturm
+http://opengameart.org/content/die-ruhe-vor-dem-sturm
+
+Croco Rocket
+http://opengameart.org/content/crocorocket
+Johan Brodd
+
+
+==TEXTURES==
+Cobblestone
+http://shawarma.unity3d.com/en/#!/content/18937
+
+TL_Grass
+http://shawarma.unity3d.com/en/#!/content/28929

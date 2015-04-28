@@ -43,7 +43,7 @@ function OnGUI () {
     }
 }
 
-function LateUpdate () {
+function FixedUpdate () {
 	// Early out if we don't have a target
 	if (!target)
 		return;

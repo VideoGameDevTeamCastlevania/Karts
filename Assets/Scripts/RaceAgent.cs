@@ -15,8 +15,8 @@ public class RaceAgent : MonoBehaviour {
 		WaypointObj = GameObject.FindGameObjectWithTag ("WaypointManagerTag");
 		WaypointObj.GetComponent<WaypointManager> ();
 		agent.angularSpeed = 10000;
-		agent.speed = 50;
-		agent.acceleration = 30;
+		agent.speed = 45;
+		agent.acceleration = 15;
 		agent.baseOffset = 1.5f;
 		agent.radius = 4.5f;
 		targetWaypoint = WaypointObj.GetComponent<WaypointManager> ().Waypoints [waypointIndex];
